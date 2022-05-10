@@ -1,0 +1,122 @@
+
+
+
+<!-- second level header --> 
+<!-- second level header --> 
+<div class="container-xxl py-5 page-header position-relative mb-5" style="margin: none !important;">
+    <div class="container py-5" style="margin: none !important;">
+        <h1 class="display-3 text-white animated slideInDown mb-4">Post</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Contact Us</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- second level header -->
+<!-- second level header --> 
+
+
+
+<div class="body" style="display: flex; justify-content:space-around;">
+    <div class="h-100 d-flex flex-column justify-content-center p-5" class="containe" style="width: 50%;">
+        <div class="h-100 d-flex flex-column justify-content-center p-5" >
+
+    <div class="img-post m-b-15">
+        <img  src="data:image/png;base64,{{post.image}}" alt="Awesome Image" style="width:-webkit-fill-available">
+        <p style="margin: 20px;background: #fff5f3;
+        height: 67px;border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;">
+        {{post.title}}
+    </p>
+    </div>
+    </div>
+</div>
+    <div class="h-100 d-flex flex-column justify-content-center p-5" class="containe" style="width: 40%;">
+<div class="container">
+<div class="be-comment-block">
+	<h1 >{{nbrOfComments}} Comments</h1>
+	
+	
+	<div class="be-comment" style="overflow:scroll; height:350px;overflow-x: hidden; ">
+		
+		<div class="be-comment-content" *ngFor="let c of listComments">
+			<span style="display: flex ;justify-content:space-between ;width: auto;">
+            <span class="be-comment-name" style="display: flex;"> 
+                <img src="https://cdn-icons-png.flaticon.com/512/191/191526.png" width="40" height="40" alt="bébé Icône gratuit" title="bébé Icône gratuit">		
+
+                 <h3 style="font-size: 18px !important; margin-left: 10px;">{{c.userComment.username}}</h3>
+			</span>
+			<span class="be-comment-time">
+				<i class="bi bi-alarm"></i>
+				{{c.commentDate}}
+			</span></span>
+            <div class="be-comment-text">
+			<p style=" font-size: 15px;padding: 5px 20px 6px 20px;margin: 0px;color: #7a8192;">{{c.commentContent}}</p>
+
+                <div *ngIf="c.userComment.id == currentUser">
+                    <div ngbDropdown class="d-inline-block">
+                        <button type="button" class="btn btn-outline-primary" id="dropdown1" ngbDropdownToggle style="border: 3px solid ;"></button>
+                        <div ngbDropdownMenu aria-labelledby="dropdown1" style="background: #fff5f3;">
+                          <button ngbDropdownItem (click)="deleteComment(c.idComment)" style="color: red;">Delete</button>
+                          <button ngbDropdownItem (click)="open(content,c)" style="color:green ;">Update</button>
+                          </div>
+                      </div>
+                  
+               
+               
+               
+                <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+                      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-block" [formGroup]="updatedComment" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                
+                                <div class="col-xs-12">									
+                                    <div class="form-group">
+                                        <textarea [defaultValue]='c.commentContent' class="form-input" formControlName="commentContent" name="commentContent" ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-outline-dark" (click)="c('Save click')" (click)="updateComment()">Save</button>
+                    </div>
+                  </ng-template>
+                  
+
+
+
+
+
+
+
+
+                  
+                </div>
+                </div>
+		</div>
+	</div>
+	<form class="form-block" [formGroup]="Comment" (ngSubmit)="onSubmit()">
+		<div class="row">
+			
+			<div class="col-xs-12">									
+				<div class="form-group">
+					<textarea class="form-input" formControlName="commentContent" name="commentContent" required="" placeholder="Your text"></textarea>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary pull-right">submit</button>
+		</div>
+	</form>
+</div>
+</div>
+    </div>
+</div>

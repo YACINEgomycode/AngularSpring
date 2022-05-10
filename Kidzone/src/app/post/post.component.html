@@ -1,0 +1,136 @@
+<!-- second level header --> 
+<div class="container-xxl py-5 page-header position-relative mb-5" style="margin: none !important;">
+    <div class="container py-5" style="margin: none !important;">
+        <h1 class="display-3 text-white animated slideInDown mb-4">NewsFeed</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Contact Us</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- second level header --> 
+
+
+<!-- Form Ajout Post --> 
+<div class="postt" style="display: flex;">
+<div class="h-100 d-flex flex-column justify-content-center p-5">
+<div class="containe">
+    <div class="wrapper">
+      <section class="post">
+        <header>Create Post</header>
+        <form  [formGroup]="Post" (ngSubmit)="onSubmit()">
+          <div class="content">
+           
+              </div>
+            
+          
+          <textarea placeholder="What's on your mind?" spellcheck="false" name="title"
+          formControlName="title" required></textarea>
+          <div class="options">
+            <p >Add to Your Post</p>
+            <ul class="list">
+              <li>
+                <div class="image-upload">
+            <label for="file-input">
+                <img src="assets/icons/gallery.svg" alt="gallery">
+            </label>
+          
+            <input id="file-input" class="custom-file-input" 
+            type="file" name="image" placeholder="Product Name"
+             (change)="upload($event)" /></div></li>
+            </ul>
+          </div>
+          <button type="submit">Post</button>
+        </form>
+      </section>
+      
+    </div>
+  </div>
+  </div>
+
+  <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" style="min-height: 200px;">
+    <div class="position-relative h-100">
+        
+        <iframe class="position-relative rounded w-100 h-70" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6789336.088186808!2d5.068990379928643!3d33.8095901206974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x125595448316a4e1%3A0x3a84333aaa019bef!2sTunisia!5e0!3m2!1sen!2sbd!4v1650416643566!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</div>
+</div>
+<!-- Form Ajout Post --> 
+
+
+ <!-- affichage des Posts dans des cards -->
+<div class="container blog-page">
+    <div class="row clearfix">
+        <div *ngFor="let p of pageOfItems" class="col-lg-4 col-md-12">
+            <div class="card single_post">
+                
+                <div class="body">
+                    <ul class="meta">
+                        <li><a href="javascript:void(0);"><i class="zmdi zmdi-account col-blue" style="display:flex ;"></i>Posted By :  {{p.userPost.username}}</a></li>
+                        <li><a href="javascript:void(0);"><i class="zmdi zmdi-comment-text col-blue"></i>Comments: 3</a></li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <div class="img-post m-b-15">
+                        <img  src="data:image/png;base64,{{p.image}}" alt="Awesome Image">
+                    </div>
+                    <p>{{p.title}}</p>
+                    <div style="display:flex ;justify-content: space-between;">
+                    
+
+                   
+                    <a [routerLink]="['/postDetails', p.idPost]" title="read more" class="btn btn-primary">Read More</a>
+                    <div *ngIf="(userType == ADMIN)">
+                      <div ngbDropdown class="d-inline-block">
+                          <button type="button" class="btn btn-outline-primary" id="dropdown1" ngbDropdownToggle style="border: 3px solid ;"></button>
+                          <div ngbDropdownMenu aria-labelledby="dropdown1" style="background: #fff5f3;">
+                            <button ngbDropdownItem  style="color: red;">Delete</button>
+                            <button ngbDropdownItem >Update</button>
+                            </div>
+                        </div></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- affichage de la pagination -->
+    <jw-pagination [items]="listPosts"
+                   (changePage)="pageClick($event)"
+                   [pageSize]="pageSize">1
+    </jw-pagination>
+     <!-- affichage de la pagination -->
+
+     <!-- affichage des Statistiques -->
+    <div class="chart">
+      <h1>Stats</h1>
+
+     
+        <canvas
+            baseChart
+            [data]="salesData"
+            [type]="'line'"
+            [options]="chartOptions"
+          >
+          </canvas></div>
+           <!-- affichage des Statistiques -->
+</div>
+ <!-- affichage des Posts dans des cards -->
+
+ <!-- CSS & JS  -->
+
+<script>
+    const container = document.querySelector(".container"),
+    privacy = container.querySelector(".post .privacy"),
+    arrowBack = container.querySelector(".audience .arrow-back");
+
+    privacy.addEventListener("click", () => {
+      container.classList.add("active");
+    });
+
+    arrowBack.addEventListener("click", () => {
+      container.classList.remove("active");
+    });
+  </script>

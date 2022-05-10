@@ -1,0 +1,57 @@
+<div class="container-xxl py-5 page-header position-relative mb-5">
+  <div class="container py-5">
+    <h1 class="display-2 text-white animated slideInDown mb-4">Update</h1>
+    <nav aria-label="breadcrumb animated slideInDown">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item text-white active" aria-current="page">Contact Us</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="col-md-6 offset-md-3">
+  <form  [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label> FirstName  </label>
+      <input   type="text" class="form-control" id="firstName" [(ngModel)]= user.firstName  formControlName="firstName">
+      <small *ngIf="updateForm.get('firstName')?.invalid && updateForm.get('firstName')?.touched" class="text-danger">FistName contains 4 caracters at minimum </small>
+    </div>
+
+    <div class="form-group">
+      <label> LastName  </label>
+      <input    type="text" class="form-control" id="lastName" [(ngModel)]= user.lastName   formControlName="lastName">
+      <small *ngIf="updateForm.get('lastName')?.invalid && updateForm.get('lastName')?.touched" class="text-danger">LastName contains 4 caracters at minimum </small>
+
+    </div>
+    <div class="form-group">
+      <label> UserName  </label>
+      <input type="text" class="form-control" id="username" [(ngModel)]= user.username  formControlName="username">
+      <small *ngIf="updateForm.get('username')?.invalid && updateForm.get('username')?.touched" class="text-danger">Username contains 4 caracters at minimum</small>
+    </div>
+    <div class="form-group">
+      <label> Email  </label>
+      <input type="text" class="form-control" id="email" [(ngModel)]= user.email   formControlName="email">
+      <small *ngIf="updateForm.get('email')?.invalid && updateForm.get('email')?.touched" class="text-danger">Email is not valid</small>
+
+    </div>
+
+    <div class="form-group">
+      <label> Password  </label>
+      <input type="password" class="form-control" id="password" [(ngModel)]= user.password   formControlName="password">
+      <small *ngIf="updateForm.get('password')?.invalid && updateForm.get('password')?.touched" class="text-danger">Password contains 4 caracters at minimum</small>
+    </div>
+
+
+    <div class="form-group">
+      <label> Image  </label>
+      <input type="file" class="form-control" id="image" [(ngModel)]= user.image  formControlName="image">
+    </div>
+
+    <br>
+    <button [disabled]="updateForm.invalid" class="btn btn-success" type="submit">Submit</button>
+
+  </form>
+
+</div>

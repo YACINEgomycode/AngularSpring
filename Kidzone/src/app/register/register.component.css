@@ -1,0 +1,9 @@
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+
+.form-control.ng-touched.ng-invalid {
+  border:1.5px solid red;
+}
+.form-control.ng-touched.ng-valid {
+  border:1px solid green;
+}
